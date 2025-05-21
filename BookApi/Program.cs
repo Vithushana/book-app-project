@@ -1,0 +1,14 @@
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services
+builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+var app = builder.Build();
+
+app.UseCors("AllowAll");
+app.MapControllers();
+app.Run();
